@@ -44,18 +44,28 @@ const votes =
 
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 5000;
 
 app.use(express.json());
 
 // GET Request that returns the entire list of existing polls
-app.get("/polls", (req, res) => { res.json({ message: "Returning list of existing polls", pollList:polls  }) });
+app.get("/polls", (req, res) => 
+    { 
+        // This is essential for allowing the front-end to access the server resources, without it we would just get CORS related errors.
+        res.set("Access-Control-Allow-Origin", "http://localhost:3000");
+
+        // Send response in JSON format
+        res.json({ message: "Returning list of existing polls", pollList:polls  }) 
+    }
+);
 
 // GET Request that returns a specific poll (if existing)
 app.get("/polls/:id", (req, res) => 
     { 
         const requestedPollID = req.params.id;
         const returnedPoll = polls.find((poll) => { return poll.pollID == requestedPollID; });
+
+        res.set("Access-Control-Allow-Origin", "http://localhost:3000");
 
         if (returnedPoll) // Success, the poll was found
             res.json({ message: "Returning requested poll", poll:returnedPoll });
@@ -69,7 +79,12 @@ app.get("/polls/:id", (req, res) =>
 );
 
 // GET Request that returns a list of vote results for each existing poll
-app.get("/votes", (req, res) => { res.json({ message: "Returning list of votes for existing polls", pollList:votes  }) });
+app.get("/votes", (req, res) => 
+    { 
+        res.set("Access-Control-Allow-Origin", "http://localhost:3000");
+        res.json({ message: "Returning list of votes for existing polls", pollList:votes  });
+    }
+);
 
 // POST Request that sends the user's vote to the server
 app.post("/votes", (req, res) => 
@@ -78,6 +93,8 @@ app.post("/votes", (req, res) =>
 
         const userVote = req.body;
         const relatedPoll = votes.find((poll) => { return poll.pollID == userVote.pollID; }); // Find the related poll first
+
+        res.set("Access-Control-Allow-Origin", "http://localhost:3000");
 
         if (relatedPoll)
         {

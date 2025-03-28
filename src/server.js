@@ -52,7 +52,7 @@ app.use(express.json());
 app.get("/polls", (req, res) => 
     { 
         // This is essential for allowing the front-end to access the server resources, without it we would just get CORS related errors.
-        res.set("Access-Control-Allow-Origin", "http://localhost:3000");
+        res.set("Access-Control-Allow-Origin", "*");
 
         // Send response in JSON format
         res.json({ message: "Returning list of existing polls", pollList:polls  }) 
@@ -65,7 +65,7 @@ app.get("/polls/:id", (req, res) =>
         const requestedPollID = req.params.id;
         const returnedPoll = polls.find((poll) => { return poll.pollID == requestedPollID; });
 
-        res.set("Access-Control-Allow-Origin", "http://localhost:3000");
+        res.set("Access-Control-Allow-Origin", "*");
 
         if (returnedPoll) // Success, the poll was found
             res.json({ message: "Returning requested poll", poll:returnedPoll });
@@ -81,7 +81,7 @@ app.get("/polls/:id", (req, res) =>
 // GET Request that returns a list of vote results for each existing poll
 app.get("/votes", (req, res) => 
     { 
-        res.set("Access-Control-Allow-Origin", "http://localhost:3000");
+        res.set("Access-Control-Allow-Origin", "*");
         res.json({ message: "Returning list of votes for existing polls", pollList:votes  });
     }
 );
@@ -94,7 +94,7 @@ app.post("/votes", (req, res) =>
         const userVote = req.body;
         const relatedPoll = votes.find((poll) => { return poll.pollID == userVote.pollID; }); // Find the related poll first
 
-        res.set("Access-Control-Allow-Origin", "http://localhost:3000");
+        res.set("Access-Control-Allow-Origin", "*");
 
         if (relatedPoll)
         {

@@ -1,0 +1,19 @@
+body {
+    background-image: url("assets/bkg.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+#logo {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    width:200px;
+}

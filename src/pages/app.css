@@ -1,0 +1,59 @@
+h1 {
+    color: white;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.outline-font {
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.option, .selectedOption, #submitButton {
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+    
+    width:250px;
+    height: 60px;
+    color: white;
+    background-color: rgba(140, 140, 140, .4);
+    border-color: white;
+    border-radius: 4px;
+    border-width: 2px;
+    font-size: medium;
+
+    transition: background-color .4s ease;
+}
+
+.option:hover {
+    background-color: rgba(255, 255, 255, .4);
+    transition: background-color .4s ease;
+}
+
+.selectedOption {
+    background-color: rgba(153, 107, 249, .6);
+}
+
+#submitButton {
+    color: #996BF9;
+    font-weight: bold;
+    background-color: white;
+
+    transition: all .4s ease;
+}
+
+#submitButton:hover {
+    color: white;
+    background-color: #996BF9;
+    border-color: #996BF9;
+
+    transition: all .4s ease;
+}
+
+#poll-section {
+    margin: auto;
+    width: 70vw;
+}

@@ -1,24 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './app.css'
+import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
 
+import VotingPage from './pages/voting'
+import ConfirmationPage from './pages/confirmation'
+import InvalidPage from './pages/invalid_page'
+
+import './index.css'
 import logo from './assets/logo.png'
+
+function BasePageLayout() // The parent layout of each page, used only to render the logo and background for all pages
+{
+    return (
+            <>
+            <Link to="/">
+                <img id="logo" alt="logo" src={logo} />
+            </Link>
+            <Outlet />
+            </>
+    );
+}
 
 function App()
 {
-    const [poll, setPoll] = useState({});
-
-    useEffect(() => 
-        { 
-            const url = new URL("http://localhost:5000/polls/1");
-            fetch(url).then(response => response.json()).then(data => { setPoll(data.poll) }).catch(error => { console.log(error); });
-        }, [])
-
+    // Here we define the URL paths for each page in this web app
     return (
-        <>
-        <img id="logo" alt="logo" src={logo} />
-        <h1>{poll.question}</h1>
-        </>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<BasePageLayout />}>
+                    <Route index element={<VotingPage />} />
+                    <Route path="confirmed" element={<ConfirmationPage />} />
+                    <Route path="*" element={<InvalidPage />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     )
 }
 

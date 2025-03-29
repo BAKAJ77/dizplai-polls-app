@@ -6,14 +6,9 @@ body {
     background-position: center;
 }
 
-h1 {
-    color: white;
-    text-align: center;
-}
-
 #logo {
     display: block;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 4vh;
     width:200px;
 }

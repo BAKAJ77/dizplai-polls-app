@@ -43,19 +43,16 @@ const votes =
 ]
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = 5000;
 
-app.use(express.json());
+app.use(express.json(), cors());
 
 // GET Request that returns the entire list of existing polls
 app.get("/polls", (req, res) => 
     { 
-        // This is essential for allowing the front-end to access the server resources, without it we would just get CORS related errors.
-        res.set("Access-Control-Allow-Origin", "*");
-
-        // Send response in JSON format
-        res.json({ message: "Returning list of existing polls", pollList:polls  }) 
+        res.json({ message: "Returning list of existing polls", pollList:polls  }) // Constructs the JSON data to send in response
     }
 );
 
@@ -65,14 +62,12 @@ app.get("/polls/:id", (req, res) =>
         const requestedPollID = req.params.id;
         const returnedPoll = polls.find((poll) => { return poll.pollID == requestedPollID; });
 
-        res.set("Access-Control-Allow-Origin", "*");
-
         if (returnedPoll) // Success, the poll was found
             res.json({ message: "Returning requested poll", poll:returnedPoll });
         else
         {
             // Failure, the poll doesn't exist
-            res.status(404);
+            res.status(404); // 404 -> NOT FOUND ERROR
             res.json({ message: "Requested poll does not exist (ID: " + requestedPollID + ")" });
         }
     }
@@ -81,7 +76,6 @@ app.get("/polls/:id", (req, res) =>
 // GET Request that returns a list of vote results for each existing poll
 app.get("/votes", (req, res) => 
     { 
-        res.set("Access-Control-Allow-Origin", "*");
         res.json({ message: "Returning list of votes for existing polls", pollList:votes  });
     }
 );
@@ -94,8 +88,6 @@ app.post("/votes", (req, res) =>
         const userVote = req.body;
         const relatedPoll = votes.find((poll) => { return poll.pollID == userVote.pollID; }); // Find the related poll first
 
-        res.set("Access-Control-Allow-Origin", "*");
-
         if (relatedPoll)
         {
             const voteOption = relatedPoll.options.find((option) => { return option.id == userVote.optionID; }); // Find the voted option
@@ -106,7 +98,7 @@ app.post("/votes", (req, res) =>
             }
             else
             {
-                res.status(422);
+                res.status(422); // 422 -> UNPROCESSABLE ENTITY ERROR
                 res.json({ message: "Vote option does not exist (ID: " + userVote.optionID + ")" });
             }
         }

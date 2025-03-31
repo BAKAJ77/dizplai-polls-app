@@ -11,16 +11,17 @@ h1 {
     font-style: normal;
 }
 
-.option, .selectedOption, #submitButton {
+.option, .selectedOption, .voteBarContainer, .voteBar, #submitButton {
     display: block;
     margin: auto;
     margin-bottom: 30px;
     
-    width:250px;
+    width: 250px;
     height: 60px;
     color: white;
     background-color: rgba(140, 140, 140, .4);
-    border-color: white;
+    border-color: #8C8C8C;
+    border-style: solid;
     border-radius: 4px;
     border-width: 2px;
     font-size: medium;
@@ -35,6 +36,44 @@ h1 {
 
 .selectedOption {
     background-color: rgba(153, 107, 249, .6);
+}
+
+.voteBarContainer {
+    position: relative;
+    transition: none;
+    overflow: hidden;
+}
+
+.voteBar {
+    position: absolute;
+    
+    color: red;
+    background-color: #996BF9;
+    border-radius: 2px;
+    border-style: none;
+    transition: none;
+
+    animation: barAnimation 2s ease-in-out;
+    animation-fill-mode: both;
+}
+
+@keyframes barAnimation {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+.voteText {
+    position: absolute;
+    left: 50px;
+    right: 50px;
+    top: 4px;
+    text-align: center;
+}
+
+.percentage {
+    position: absolute;
+    right: 10px;
+    top: 4px;
 }
 
 #submitButton {

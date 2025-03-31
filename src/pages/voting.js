@@ -8,9 +8,11 @@ function VotingPage()
     const [selectedVoteID, setSelectedVote] = useState(-1);
     const navigate = useNavigate();
 
+    const hostname = window.location.hostname;
+    
     function OnSubmitCallback()
     {
-        let url = new URL("http://192.168.0.183:5000/votes");
+        let url = new URL("http://" + hostname  + ":5000/votes");
         fetch(url, { 
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -20,9 +22,9 @@ function VotingPage()
     
     useEffect(() => 
         { 
-            let url = new URL("http://192.168.0.183:5000/polls/1");
+            let url = new URL("http://" + hostname + ":5000/polls/1");
             fetch(url).then(response => response.json()).then(data => { setPoll(data.poll); }).catch(error => { console.log(error); });
-        }, [])
+        }, [hostname])
 
     return (
         <>

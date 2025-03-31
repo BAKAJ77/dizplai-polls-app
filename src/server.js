@@ -28,14 +28,17 @@ const votes =
         "options": [
             {
                 "id": 1,
+                "text": "Manchester City",
                 "numVotes": 0
             },
             {
                 "id": 2,
+                "text": "Arsenal",
                 "numVotes": 0
             },
             {
                 "id": 3,
+                "text": "Liverpool",
                 "numVotes": 0
             }
         ]
@@ -52,7 +55,7 @@ app.use(express.json(), cors());
 // GET Request that returns the entire list of existing polls
 app.get("/polls", (req, res) => 
     { 
-        res.json({ message: "Returning list of existing polls", pollList:polls  }) // Constructs the JSON data to send in response
+        res.json({ message: "Returning list of existing polls", pollList: polls  }) // Constructs the JSON data to send in response
     }
 );
 
@@ -63,7 +66,7 @@ app.get("/polls/:id", (req, res) =>
         const returnedPoll = polls.find((poll) => { return poll.pollID == requestedPollID; });
 
         if (returnedPoll) // Success, the poll was found
-            res.json({ message: "Returning requested poll", poll:returnedPoll });
+            res.json({ message: "Returning requested poll", poll: returnedPoll });
         else
         {
             // Failure, the poll doesn't exist
@@ -76,7 +79,23 @@ app.get("/polls/:id", (req, res) =>
 // GET Request that returns a list of vote results for each existing poll
 app.get("/votes", (req, res) => 
     { 
-        res.json({ message: "Returning list of votes for existing polls", pollList:votes  });
+        res.json({ message: "Returning list of votes for existing polls", pollList: votes  });
+    }
+);
+
+// GET Request that returns the current vote results for the requested poll
+app.get("/votes/:id", (req, res) =>
+    {
+        const requestedPollID = req.params.id;
+        const returnedPollVotes = votes.find((poll) => { return poll.pollID == requestedPollID; });
+
+        if (returnedPollVotes)
+            res.json({ message: "Returning votes associated with requested poll", votes: returnedPollVotes });
+        else
+        {
+            res.status(404);
+            res.json({ message: "Associated poll from request does not exist (ID: " + requestedPollID + ")" });
+        }
     }
 );
 

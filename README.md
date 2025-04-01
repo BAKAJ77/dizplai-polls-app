@@ -39,6 +39,12 @@ which is connected to the same network, you will have to navigate to `http://<IP
 - Replace `<port>` with the port the development server is using, this should be displayed after executing the `npm start` command.
 - Replace `<IPv4 Address>` with the host machine's IPv4 address, this can found by executing the `ipconfig` command.
 
+## Testing
+- I tested the back-end server API using Postman software. From Postman, I would send `POST` and `GET` requests to test that the back-end API was behaving as expected and 
+that the response returned contained the correct data according to the nature of the request; this includes testing to see that invalid requests were handled correctly. </br>
+- I ran out of time before I could write up good unit tests for the front-end with `vitest`, however I did stress test it a lot manually to ensure that the web page elements were all displayed
+correctly, and that data fetched from the backend was displayed as expected. If given more time, I would work on building good unit tests to automate validating the front-end's functionality.
+
 ## Possible future improvements?
 - The server API's `CORS` rules have been set to allow requests of any origin to access the server's resources, this could pose a problem as private server resources could be accessed by anyone.
 This could be mitigated by configuring `CORS` to only allow requests originating from the website's URL; requests of any other origin will be automatically rejected.

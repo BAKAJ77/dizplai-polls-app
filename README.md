@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Dizplai Polls Web App
+## Summary
+A simple web app created for the Dizplai Technical Test where users can place a vote on the poll fetched from the server-side of the application. </br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Prerequisites
+This project only requires that [Node.js](https://nodejs.org/en) is installed. </br>
+**Node.js v22.14.0 was used for this project.**
 
-## Available Scripts
+## Setting up the project
+Setting up this project is a very straightforward process. Firstly, clone a copy of this repository onto your computer:
+```
+git clone https://github.com/BAKAJ77/dizplai-polls-app.git
+```
 
-In the project directory, you can run:
+Once done, run the following command in the project's root directory:
+```
+npm install
+```
 
-### `npm start`
+This command will automatically install all the Node module dependencies used in this project such as `express`, `cors`, etc. </br>
+Once this is completed successfully, the project will be ready for execution.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Running the project locally
+You will only need to execute 2 commands from the project's root directory to get the project up-and-running locally. </br>
+**Note: Both of these commands will need to be executed in seperate command prompt tabs.** </br> </br>
+First, startup the web app's back-end server with the following command:
+```
+node src/backend/server.js
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Now that the back-end server is running, we can execute the development server.
+```
+npm start
+```
 
-### `npm test`
+To access the web app on the host machine's web browser, simply navigate to `http://localhost:<port>`. However, to access the web app on any other device, 
+which is connected to the same network, you will have to navigate to `http://<IPv4 Address>:<port>` instead.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Replace `<port>` with the port the development server is using, this should be displayed after executing the `npm start` command.
+- Replace `<IPv4 Address>` with the host machine's IPv4 address, this can found by executing the `ipconfig` command.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Possible future improvements?
+- The server API's `CORS` rules have been set to allow requests of any origin to access the server's resources, this could pose a problem as private server resources could be accessed by anyone.
+This could be mitigated by configuring `CORS` to only allow requests originating from the website's URL; requests of any other origin will be automatically rejected.
+- The website currently exchanges data using basic `HTTP`, data is transferred as plain text which leaves it vulnerable to eavesdropping and tampering. This could be prevented by using `HTTPS` instead
+since data is protected via encryption using `SSL/TSL`.
+- Right now, only the hard-coded poll can be voted on. In production, there could be a preceeding web page that displays the list of different polls that a user can select to vote on.
+- Currently, the poll data is stored in memory on the local machine running the back-end server. In production, the data could be stored in a dedicated database (`MySQL`?), which will also allow for
+new polls to be added easily.

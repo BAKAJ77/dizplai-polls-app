@@ -4,8 +4,6 @@
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
     "cors": "^2.8.5",
     "express": "^4.21.2",
@@ -17,6 +15,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
+    "test": "vitest",
     "serve": "vite preview"
   },
   "eslintConfig": {
@@ -38,7 +37,11 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^6.2.4"
+    "jsdom": "^26.0.0",
+    "vite": "^6.2.4",
+    "vitest": "^3.1.1"
   }
 }
